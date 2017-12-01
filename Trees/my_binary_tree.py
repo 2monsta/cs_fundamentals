@@ -33,7 +33,28 @@ class myTreeNode(Node):
 					return False
 				else:
 					return self.right.exists(value_toSearchFor)
+
+	def height(self):
+		if self.left is None and self.right is None:
+			return 1
+		left_subtree_height = 0
+		right_subtree_height =0
+		if self.left is not None:
+			left_subtree_height = self.left.height()
+		if self.right is not None:
+			right_subtree_height = self.right.height()
+
+		if left_subtree_height > right_subtree_height:
+			return left_subtree_height +1
+		else:
+			return right_subtree_height +1
 			
+
+# three ways to process the tree
+# in order : left self right
+# post order: left right self
+# pre order: self left right
+
 class BST:
 	def __init__(self):
 		self.root = None
@@ -51,7 +72,18 @@ class BST:
 		else:
 			return self.root.exists(value)
 
+	def height(self):
+		if self.root is not None:
+			return self.root.height()
+		return 0
+	def print_in_order(self):
+		if self.left is not None:
+			self.left.print_in_order()
 
+		# print self and print right tree
+		print self.value
+		if self.right is not None:
+			self.print_in_order()
 
 def random_numbers(total_numbers):
     return [int(1000 * nprnd.random()) for i in range(total_numbers)]
@@ -62,3 +94,4 @@ for i in random_numbers(10):
 
 print tree.exists(199);
 show(tree.root)
+print tree.height();
